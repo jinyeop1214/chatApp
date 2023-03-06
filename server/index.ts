@@ -19,8 +19,8 @@ io.on("connection", (socket) => {
 
 	socket.emit("hello from server", "HI");
 
-	socket.on("hello from client", (argv) => {
-		console.log(argv, "ASD");
+	socket.on("hello from client", (msg) => {
+		console.log(msg);
 	});
 
 	socket.on("disconnect", (reason) => {

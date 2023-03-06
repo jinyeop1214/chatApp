@@ -1,6 +1,11 @@
 {
-  "name": "chatApp",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT"
+	"name": "chatApp",
+	"version": "1.0.0",
+	"license": "MIT",
+	"scripts": {
+		"start": "concurrently \"cd server && yarn start\" \"cd client && yarn start\""
+	},
+	"dependencies": {
+		"concurrently": "^7.6.0"
+	}
 }
