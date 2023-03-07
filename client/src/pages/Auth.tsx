@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import NavBtn from "../atoms/NavBtn";
 
 const Auth = () => {
 	const navigate = useNavigate();
@@ -15,12 +15,8 @@ const Auth = () => {
 
 	return (
 		<div>
-			<Button variant="contained" onClick={handleNavLoginPage}>
-				Log In
-			</Button>
-			<Button variant="contained" onClick={handleNavSignupPage}>
-				Sign Up
-			</Button>
+			<NavBtn content={`로그인`} handleClick={handleNavLoginPage} />
+			<NavBtn content={`회원 가입`} handleClick={handleNavSignupPage} />
 		</div>
 	);
 };

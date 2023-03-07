@@ -24,7 +24,6 @@ function App() {
 	socket.on("disconnect", (reason) => {
 		console.log(reason);
 	});
-
 	return <Routes />;
 }
 
