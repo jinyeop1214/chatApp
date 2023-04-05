@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const AddRoomBtn = () => {
@@ -11,11 +10,7 @@ const AddRoomBtn = () => {
 		console.log("Add New Room.");
 	};
 
-	return (
-		<Button variant="contained" onClick={handleAddRoom}>
-			+ &nbsp;새 채팅방 생성하기
-		</Button>
-	);
+	return <button onClick={handleAddRoom}>+ &nbsp;새 채팅방 생성하기</button>;
 };
 
 export default AddRoomBtn;

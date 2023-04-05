@@ -7,7 +7,7 @@ import Room from "./pages/Room";
 import Signup from "./pages/Signup";
 
 const Routes = () => {
-	const [isLoggedIn, setIsLoggedIn] = useState(true);
+	// const [isLoggedIn, setIsLoggedIn] = useState(true);
 
 	return (
 		<ReactRouterRoutes>
@@ -19,7 +19,8 @@ const Routes = () => {
 			<Route
 				path="/"
 				element={
-					<Navigate replace to={isLoggedIn ? "/chat" : "/auth"} />
+					<Navigate replace to={"/chat"} />
+					// <Navigate replace to={isLoggedIn ? "/chat" : "/auth"} />
 				}
 			/>
 			<Route path="*" element={<Navigate replace to="/" />} />

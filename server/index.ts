@@ -14,6 +14,10 @@ const io = new Server(server, {
 	},
 });
 
+/**
+ * io를 export해서 소켓 이벤트 정의해두는 곳을 한 파일에 정의.
+ */
+
 io.on("connection", (socket) => {
 	console.log(socket);
 

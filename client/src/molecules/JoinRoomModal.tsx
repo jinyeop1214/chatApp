@@ -1,4 +1,3 @@
-import { Button, TextField } from "@mui/material";
 import React, { ChangeEventHandler, useState } from "react";
 
 /**
@@ -21,18 +20,15 @@ const JoinRoomModal = () => {
 	return (
 		<div>
 			<div>채팅방 ID를 입력하세요.</div>
-			<TextField
+			<input
 				type="text"
 				placeholder="채팅방 ID"
 				value={id}
 				onChange={handleChangeId}
 			/>
-			<Button
-				variant="contained"
-				onClick={id === "" ? undefined : handleJoinRoomModal}
-			>
+			<button onClick={id === "" ? undefined : handleJoinRoomModal}>
 				입장
-			</Button>
+			</button>
 		</div>
 	);
 };

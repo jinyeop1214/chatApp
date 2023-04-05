@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import JoinRoomModal from "../molecules/JoinRoomModal";
 
@@ -14,9 +13,9 @@ const JoinRoomBtn = () => {
 
 	return (
 		<>
-			<Button variant="contained" onClick={handleJoinRoom}>
+			<button onClick={handleJoinRoom}>
 				채팅방 입장하기
-			</Button>
+			</button>
 			{show && <JoinRoomModal />}
 		</>
 	);

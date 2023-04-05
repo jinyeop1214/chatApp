@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "@mui/material/Button";
 
 interface props {
 	content: string;
@@ -7,11 +6,7 @@ interface props {
 }
 
 const NavBtn = ({ content, handleClick }: props) => {
-	return (
-		<Button variant="contained" onClick={handleClick}>
-			{content}
-		</Button>
-	);
+	return <button onClick={handleClick}>{content}</button>;
 };
 
 export default NavBtn;

@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const NewChatBtn = () => {
@@ -10,11 +9,7 @@ const NewChatBtn = () => {
 		location.pathname !== "/chat" && navigate(`/chat`);
 	};
 
-	return (
-		<Button variant="contained" onClick={handleNavChatPage}>
-			+ &nbsp;새로운 채팅
-		</Button>
-	);
+	return <button onClick={handleNavChatPage}>+ &nbsp;새로운 채팅</button>;
 };
 
 export default NewChatBtn;

@@ -1,7 +1,5 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import Blank from "../atoms/Blank";
 
 type Inputs = {
@@ -21,23 +19,19 @@ const LoginForm = () => {
 
 	return (
 		<form>
-			<TextField
+			<input
 				id="filled-basic"
-				label="Email Address"
-				variant="filled"
+				placeholder="Email Address"
 				{...register("email", { required: true })}
 			/>
 			{errors.email && <Blank />}
-			<TextField
+			<input
 				id="filled-basic"
-				label="Password"
-				variant="filled"
+				placeholder="Password"
 				{...register("password", { required: true })}
 			/>
 			{errors.password && <Blank />}
-			<Button variant="contained" onClick={handleSubmit(onSubmit)}>
-				로그인
-			</Button>
+			<button onClick={handleSubmit(onSubmit)}>로그인</button>
 		</form>
 	);
 };
