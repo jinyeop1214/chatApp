@@ -6,6 +6,7 @@ export interface ServerToClientEvents {
 
 export interface ClientToServerEvents {
 	// hello: () => void;
+	nickname: (name: string, callback: () => void) => void;
 }
 
 export interface InterServerEvents {

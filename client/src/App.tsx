@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { io, Socket } from "socket.io-client";
 import Routes from "./Routes";
-import { ClientToServerEvents, ServerToClientEvents } from "./interfaces";
+import { SocketContextProvider } from "./context/socket";
 
 /**
  * 소켓을 useContext 전역 변수로 관리.
@@ -10,17 +10,21 @@ import { ClientToServerEvents, ServerToClientEvents } from "./interfaces";
  * @returns
  */
 function App() {
-	const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
-		"http://localhost:4000"
+	// const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
+	// 	"http://localhost:4000"
+	// );
+
+	// useEffect(() => {
+	// 	return () => {
+	// 		socket.disconnect();
+	// 	};
+	// }, [socket]);
+
+	return (
+		<SocketContextProvider>
+			<Routes />
+		</SocketContextProvider>
 	);
-
-	useEffect(() => {
-		return () => {
-			socket.disconnect();
-		};
-	}, [socket]);
-
-	return <Routes />;
 }
 
 export default App;

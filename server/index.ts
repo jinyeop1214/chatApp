@@ -47,10 +47,15 @@ instrument(io, {
 // 	io.sockets.adapter.rooms.get(roomName)?.size;
 
 io.on("connection", (socket) => {
-	socket.data.name = "Anon";
-	// socket.onAny((event) => {
-	// 	console.log(`Socket Event: ${event}`);
-	// });
+	socket.onAny((event) => {
+		console.log(`Socket Event: ${event}`);
+		console.log(1, socket.data.name);
+	});
+	socket.on("nickname", (name, done) => {
+		socket.data.name = name;
+		done();
+		console.log(socket.data.name);
+	});
 	// socket.on("enter_room", (roomName, done) => {
 	// 	socket.join(roomName);
 	// 	done();
