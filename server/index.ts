@@ -30,56 +30,64 @@ instrument(io, {
 	auth: false,
 });
 
-// const publicRooms = () => {
-// 	const {
-// 		sockets: {
-// 			adapter: { sids, rooms },
-// 		},
-// 	} = io;
-// 	const publicRooms: string[] = [];
-// 	rooms.forEach((_, key) => {
-// 		if (sids.get(key) === undefined) publicRooms.push(key);
-// 	});
-// 	return publicRooms;
-// };
+const publicRooms = () => {
+	const {
+		sockets: {
+			adapter: { sids, rooms },
+		},
+	} = io;
+	const publicRooms: string[] = [];
+	rooms.forEach((_, key) => {
+		if (sids.get(key) === undefined) publicRooms.push(key);
+	});
+	return publicRooms;
+};
 
-// const countRoom = (roomName: string) =>
-// 	io.sockets.adapter.rooms.get(roomName)?.size;
+const countRoom = (roomname: string) =>
+	io.sockets.adapter.rooms.get(roomname)?.size ?? -1;
 
 io.on("connection", (socket) => {
 	socket.onAny((event) => {
 		console.log(`Socket Event: ${event}`);
-		console.log(1, socket.data.name);
 	});
 	socket.on("nickname", (name, done) => {
 		socket.data.name = name;
 		done();
-		console.log(socket.data.name);
+		io.sockets.emit("room_change", publicRooms());
 	});
-	// socket.on("enter_room", (roomName, done) => {
-	// 	socket.join(roomName);
-	// 	done();
-	// 	socket
-	// 		.to(roomName)
-	// 		.emit("welcome", socket.data.name, countRoom(roomName)); // 내소켓 빼고 방안에 있는 모든 소켓에게 보냄.
-	// 	io.sockets.emit("room_change", publicRooms());
-	// });
-	// socket.on("disconnecting", () => {
-	// 	socket.rooms.forEach((room) =>
-	// 		socket.to(room).emit("bye", socket.data.name, countRoom(room) - 1)
-	// 	);
-	// });
-	// socket.on("disconnect", () => {
-	// 	io.sockets.emit("room_change", publicRooms());
-	// });
-	// socket.on("new_message", (msg, room, done) => {
-	// 	socket.to(room).emit("new_message", `${socket.data.name}: ${msg}`);
-	// 	done();
-	// });
-	// socket.on("nickname", (name, done) => {
-	// 	socket.data.name = name;
-	// 	done();
-	// });
+	socket.on("enter_room", (roomname, done) => {
+		socket.join(roomname);
+		done(countRoom(roomname));
+		socket
+			.to(roomname)
+			.emit(
+				"welcome",
+				socket.data.name ?? "Anon user",
+				countRoom(roomname)
+			); // 내소켓 빼고 방안에 있는 모든 소켓에게 보냄.
+	});
+	socket.on("disconnecting", () => {
+		socket.rooms.forEach((room) =>
+			socket
+				.to(room)
+				.emit(
+					"bye",
+					socket.data.name ?? "Anon user",
+					countRoom(room) - 1
+				)
+		);
+	});
+	socket.on("disconnect", () => {
+		io.sockets.emit("room_change", publicRooms());
+	});
+	socket.on("new_message", (msg, room, done) => {
+		socket.to(room).emit("new_message", `${socket.data.name}: ${msg}`);
+		done();
+	});
+	socket.on("nickname", (name, done) => {
+		socket.data.name = name;
+		done();
+	});
 });
 
 server.listen(4000, () => {

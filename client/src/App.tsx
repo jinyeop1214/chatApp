@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { io, Socket } from "socket.io-client";
 import Routes from "./Routes";
 import { SocketContextProvider } from "./context/socket";
+import { RoomContext, RoomContextProvider } from "./context/room";
+import { UserContextProvider } from "./context/user";
 
 /**
  * 소켓을 useContext 전역 변수로 관리.
@@ -22,7 +24,11 @@ function App() {
 
 	return (
 		<SocketContextProvider>
-			<Routes />
+			<UserContextProvider>
+				<RoomContextProvider>
+					<Routes />
+				</RoomContextProvider>
+			</UserContextProvider>
 		</SocketContextProvider>
 	);
 }

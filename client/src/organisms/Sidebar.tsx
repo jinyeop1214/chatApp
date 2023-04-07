@@ -6,8 +6,8 @@ import style from "./Sidebar.module.css";
 const Sidebar = () => {
 	return (
 		<div className={style.sidebar}>
-			<NewChatBtn />
-			<LogoutBtn />
+			{/* <NewChatBtn />
+			<LogoutBtn /> */}
 		</div>
 	);
 };
