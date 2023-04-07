@@ -2,33 +2,91 @@ import http from "http";
 import cors from "cors";
 import express from "express";
 import { Server } from "socket.io";
+import { instrument } from "@socket.io/admin-ui";
+import {
+	ClientToServerEvents,
+	InterServerEvents,
+	ServerToClientEvents,
+	SocketData,
+} from "./interfaces";
 
 const app = express();
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 const server = http.createServer(app);
-const io = new Server(server, {
+const io = new Server<
+	ClientToServerEvents,
+	ServerToClientEvents,
+	InterServerEvents,
+	SocketData
+>(server, {
 	cors: {
-		origin: "http://localhost:3000",
+		origin: ["http://localhost:3000", "https://admin.socket.io"],
 		credentials: true,
 	},
 });
 
-/**
- * io를 export해서 소켓 이벤트 정의해두는 곳을 한 파일에 정의.
- */
+instrument(io, {
+	auth: false,
+});
+
+const publicRooms = () => {
+	const {
+		sockets: {
+			adapter: { sids, rooms },
+		},
+	} = io;
+	const publicRooms: string[] = [];
+	rooms.forEach((_, key) => {
+		if (sids.get(key) === undefined) publicRooms.push(key);
+	});
+	return publicRooms;
+};
+
+const countRoom = (roomname: string) =>
+	io.sockets.adapter.rooms.get(roomname)?.size ?? -1;
 
 io.on("connection", (socket) => {
-	console.log(socket);
-
-	socket.emit("hello from server", "HI");
-
-	socket.on("hello from client", (msg) => {
-		console.log(msg);
+	socket.onAny((event) => {
+		console.log(`Socket Event: ${event}`);
 	});
-
-	socket.on("disconnect", (reason) => {
-		console.log(reason);
+	socket.on("nickname", (name, done) => {
+		socket.data.name = name;
+		done();
+		io.sockets.emit("room_change", publicRooms());
+	});
+	socket.on("enter_room", (roomname, done) => {
+		socket.join(roomname);
+		done(countRoom(roomname));
+		socket
+			.to(roomname)
+			.emit(
+				"welcome",
+				socket.data.name ?? "Anon user",
+				countRoom(roomname)
+			); // 내소켓 빼고 방안에 있는 모든 소켓에게 보냄.
+	});
+	socket.on("disconnecting", () => {
+		socket.rooms.forEach((room) =>
+			socket
+				.to(room)
+				.emit(
+					"bye",
+					socket.data.name ?? "Anon user",
+					countRoom(room) - 1
+				)
+		);
+	});
+	socket.on("disconnect", () => {
+		io.sockets.emit("room_change", publicRooms());
+	});
+	socket.on("new_message", (msg, room, done) => {
+		socket.to(room).emit("new_message", `${socket.data.name}: ${msg}`);
+		done();
+	});
+	socket.on("nickname", (name, done) => {
+		socket.data.name = name;
+		done();
 	});
 });
 

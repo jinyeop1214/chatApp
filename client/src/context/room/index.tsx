@@ -1,0 +1,35 @@
+import { createContext, ReactNode, useState } from "react";
+
+export const RoomContext = createContext<{
+	room: string;
+	setRoom: React.Dispatch<React.SetStateAction<string>>;
+	rooms: string[];
+	setRooms: React.Dispatch<React.SetStateAction<string[]>>;
+}>({
+	room: "",
+	setRoom: () => {},
+	rooms: [],
+	setRooms: () => {},
+});
+
+interface Props {
+	children: ReactNode;
+}
+
+export const RoomContextProvider = ({ children }: Props) => {
+	const [room, setRoom] = useState("");
+	const [rooms, setRooms] = useState<string[]>([]);
+
+	return (
+		<RoomContext.Provider
+			value={{
+				room,
+				setRoom,
+				rooms,
+				setRooms,
+			}}
+		>
+			{children}
+		</RoomContext.Provider>
+	);
+};

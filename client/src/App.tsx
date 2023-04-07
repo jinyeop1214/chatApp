@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
-import io from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import Routes from "./Routes";
+import { SocketContextProvider } from "./context/socket";
+import { RoomContext, RoomContextProvider } from "./context/room";
+import { UserContextProvider } from "./context/user";
 
 /**
  * 소켓을 useContext 전역 변수로 관리.
@@ -9,28 +12,25 @@ import Routes from "./Routes";
  * @returns
  */
 function App() {
-	const socket = io("http://localhost:4000");
+	// const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
+	// 	"http://localhost:4000"
+	// );
 
-	useEffect(() => {
-		return () => {
-			socket.disconnect();
-		};
-	}, [socket]);
+	// useEffect(() => {
+	// 	return () => {
+	// 		socket.disconnect();
+	// 	};
+	// }, [socket]);
 
-	socket.on("connect", () => {
-		console.log(socket);
-	});
-
-	socket.emit("hello from client", "HELLO!");
-
-	socket.on("hello from server", (msg) => {
-		console.log(msg);
-	});
-
-	socket.on("disconnect", (reason) => {
-		console.log(reason);
-	});
-	return <Routes />;
+	return (
+		<SocketContextProvider>
+			<UserContextProvider>
+				<RoomContextProvider>
+					<Routes />
+				</RoomContextProvider>
+			</UserContextProvider>
+		</SocketContextProvider>
+	);
 }
 
 export default App;
