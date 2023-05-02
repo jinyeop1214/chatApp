@@ -8,7 +8,7 @@ interface Props {
 const CreateRoomModal = ({ toggle }: Props) => {
 	const [roomId, setRoomId] = useState<string>("");
 	const { socket } = useContext(SocketContext);
-	const { setRoom } = useContext(RoomContext);
+	const { setRoom, setRooms } = useContext(RoomContext);
 
 	const handleChangeRoomId: ChangeEventHandler<HTMLInputElement> = (e) => {
 		setRoomId(e.target.value);
@@ -18,6 +18,7 @@ const CreateRoomModal = ({ toggle }: Props) => {
 		socket.emit("enter_room", roomId, () => {
 			console.log("Enter Room.");
 			setRoom(roomId);
+			setRooms((prev) => [...prev, roomId]);
 			toggle();
 		});
 	};

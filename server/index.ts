@@ -64,7 +64,7 @@ io.on("connection", (socket) => {
 				"welcome",
 				socket.data.name ?? "Anon user",
 				countRoom(roomname)
-			); // 내소켓 빼고 방안에 있는 모든 소켓에게 보냄.
+			); // emit = 내소켓 빼고 방안에(to) 있는 모든 소켓에게 보냄.
 	});
 	socket.on("disconnecting", () => {
 		socket.rooms.forEach((room) =>
@@ -93,3 +93,5 @@ io.on("connection", (socket) => {
 server.listen(4000, () => {
 	console.log("Listening on localhost:4000");
 });
+
+//처음 소켓 생성 후 로그인 후 데이터베이스에서 속한 채팅방 등등 정보 가져와서 소켓에 넣어줘야함.

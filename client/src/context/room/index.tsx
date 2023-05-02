@@ -17,8 +17,8 @@ interface Props {
 }
 
 export const RoomContextProvider = ({ children }: Props) => {
-	const [room, setRoom] = useState("");
-	const [rooms, setRooms] = useState<string[]>([]);
+	const [room, setRoom] = useState(""); //현재 방
+	const [rooms, setRooms] = useState<string[]>([]); //내가 속한 방
 
 	return (
 		<RoomContext.Provider
