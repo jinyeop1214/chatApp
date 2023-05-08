@@ -1,9 +1,19 @@
-import { createContext, ReactNode, useState } from "react";
+import {
+	createContext,
+	Dispatch,
+	ReactNode,
+	SetStateAction,
+	useState,
+} from "react";
 
 export const UserContext = createContext<{
+	userId: string;
+	setUserId: Dispatch<SetStateAction<string>>;
 	nickname: string;
-	setNickname: React.Dispatch<React.SetStateAction<string>>;
+	setNickname: Dispatch<SetStateAction<string>>;
 }>({
+	userId: "",
+	setUserId: () => {},
 	nickname: "",
 	setNickname: () => {},
 });
@@ -13,11 +23,14 @@ interface Props {
 }
 
 export const UserContextProvider = ({ children }: Props) => {
+	const [userId, setUserId] = useState("");
 	const [nickname, setNickname] = useState("");
 
 	return (
 		<UserContext.Provider
 			value={{
+				userId,
+				setUserId,
 				nickname,
 				setNickname,
 			}}

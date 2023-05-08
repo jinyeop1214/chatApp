@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { io, Socket } from "socket.io-client";
 import Routes from "./Routes";
 import { SocketContextProvider } from "./context/socket";
-import { RoomContext, RoomContextProvider } from "./context/room";
+import { RoomContextProvider } from "./context/room";
 import { UserContextProvider } from "./context/user";
 
 /**

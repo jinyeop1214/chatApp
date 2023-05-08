@@ -1,0 +1,11 @@
+.leftArrow {
+	padding: 18px 10px 20px 17px;
+	text-align: left;
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+	font-weight: 400;
+	opacity: 0.7;
+	font-size: larger;
+	cursor: pointer;
+}
