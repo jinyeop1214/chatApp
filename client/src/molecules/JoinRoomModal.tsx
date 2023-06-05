@@ -6,7 +6,7 @@ interface Props {
 	toggle: () => void;
 }
 
-const JoinRoomModal = ({ toggle }: Props) => {
+const _JoinRoomModal = ({ toggle }: Props) => {
 	const [roomId, setRoomId] = useState<string>("");
 	const { socket } = useContext(SocketContext);
 	const { setRoom, setRooms } = useContext(RoomContext);
@@ -42,4 +42,4 @@ const JoinRoomModal = ({ toggle }: Props) => {
 	);
 };
 
-export default JoinRoomModal;
+export default _JoinRoomModal;

@@ -3,7 +3,7 @@ import { RoomContext } from "../context/room";
 import { SocketContext } from "../context/socket";
 import { UserContext } from "../context/user";
 
-const RoomMenu = () => {
+const _RoomMenu = () => {
 	const { nickname } = useContext(UserContext);
 	const { socket } = useContext(SocketContext);
 	const { room, rooms } = useContext(RoomContext);
@@ -12,4 +12,4 @@ const RoomMenu = () => {
 	return <div></div>;
 };
 
-export default RoomMenu;
+export default _RoomMenu;

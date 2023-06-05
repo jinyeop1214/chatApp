@@ -6,7 +6,7 @@ interface Props {
 	toggle: () => void;
 }
 
-const CreateNicknameModal = ({ toggle }: Props) => {
+const _CreateNicknameModal = ({ toggle }: Props) => {
 	const [nickname, setNickname] = useState<string>("");
 	const { socket } = useContext(SocketContext);
 	const { setNickname: updateNickname } = useContext(UserContext);
@@ -41,4 +41,4 @@ const CreateNicknameModal = ({ toggle }: Props) => {
 	);
 };
 
-export default CreateNicknameModal;
+export default _CreateNicknameModal;

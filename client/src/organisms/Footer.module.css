@@ -1,0 +1,24 @@
+.footer {
+	display: block;
+	width: 100%;
+	text-align: center;
+	padding: 42px 0 54px;
+	margin-top: -10px;
+}
+
+.footerlogbtn {
+	text-decoration: none;
+	font-size: 14px;
+	line-height: 20px;
+	letter-spacing: -0.5px;
+	color: #929294;
+	background-color: #f9f9f9;
+	border: none;
+	cursor: pointer;
+	text-shadow: 0px 0px 0px rgb(0 0 0 / 0%);
+	transition: text-shadow 0.2s ease-in-out;
+}
+
+.footerlogbtn:hover {
+	text-shadow: 0px 0px 10px rgb(0 0 0 / 20%);
+}

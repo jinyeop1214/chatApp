@@ -1,0 +1,23 @@
+.header {
+	display: flex;
+	height: 53px;
+	padding: 8px 18px 8px 15px;
+	border-bottom: 1px solid;
+	box-sizing: border-box;
+	border-color: rgba(0, 0, 1, 0.04);
+	background-color: #05b494;
+}
+
+.naverlogo {
+	height: 21px;
+	width: 21px;
+	margin: 8px 3px 0px 0px;
+	cursor: pointer;
+}
+
+.talklogo {
+	margin: 9px 3px 0px 1px;
+	font-weight: 500;
+	color: #ffffff;
+	cursor: pointer;
+}

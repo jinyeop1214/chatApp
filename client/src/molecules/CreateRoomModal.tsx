@@ -5,7 +5,7 @@ import { RoomContext } from "../context/room";
 interface Props {
 	toggle: () => void;
 }
-const CreateRoomModal = ({ toggle }: Props) => {
+const _CreateRoomModal = ({ toggle }: Props) => {
 	const [roomId, setRoomId] = useState<string>("");
 	const { socket } = useContext(SocketContext);
 	const { setRoom, setRooms } = useContext(RoomContext);
@@ -39,4 +39,4 @@ const CreateRoomModal = ({ toggle }: Props) => {
 	);
 };
 
-export default CreateRoomModal;
+export default _CreateRoomModal;
