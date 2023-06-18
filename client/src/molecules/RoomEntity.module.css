@@ -1,0 +1,6 @@
+.body {
+	border-bottom: solid 1px #f9f9f9;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	padding: 15px 20px;
+}
