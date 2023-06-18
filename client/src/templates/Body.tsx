@@ -1,8 +1,8 @@
 import React from "react";
-import Room from "../organisms/Room";
-import Chat from "../organisms/Chat";
-import Menu from "../organisms/Menu";
 import style from "./Body.module.css";
+import Room from "./Room";
+import Chat from "./Chat";
+import Menu from "./Menu";
 
 const Body = () => {
 	return (

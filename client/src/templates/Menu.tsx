@@ -1,7 +1,8 @@
 import React from "react";
+import MyInfo from "../organisms/MyInfo";
 
 const Menu = () => {
-	return <div>Menu</div>;
+	return <MyInfo />;
 };
 
 export default Menu;
