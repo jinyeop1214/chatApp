@@ -1,4 +1,5 @@
 import React, { MouseEventHandler } from "react";
+import style from "./UpdatedRoomBtn.module.css";
 
 const UpdatedRoomBtn = () => {
 	const handleClickBtn: MouseEventHandler<HTMLDivElement> = () => {
@@ -6,7 +7,7 @@ const UpdatedRoomBtn = () => {
 	};
 
 	return (
-		<div onClick={handleClickBtn}>
+		<div onClick={handleClickBtn} className={style.body}>
 			<div>0</div>
 			<div>안읽음</div>
 		</div>

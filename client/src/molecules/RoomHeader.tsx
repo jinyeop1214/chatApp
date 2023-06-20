@@ -6,7 +6,7 @@ import style from "./RoomHeader.module.css";
 
 const RoomHeader = () => {
 	return (
-		<div>
+		<div className={style.body}>
 			<div className={style.toggles}>
 				<AllRoomBtn />
 				<UpdatedRoomBtn />
